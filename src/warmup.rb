@@ -16,12 +16,12 @@ def fib(n)
 
 def isPalindrome(n)
     str = n.to_s
-  if str == str.reverse
-    return true
-  else
-    return false
+    if str == str.reverse
+      return true
+    else
+      return false
+    end
   end
-end
 
 def nthmax(n, a)
     sorted = a.sort.reverse
@@ -70,12 +70,11 @@ def zipHash(arr1, arr2)
       end
       return h
     end
-    
 
 def hashToArray(hash)
     result = []
-  hash.each do |k, v|
-    result << [k, v]
+    hash.each do |k, v|
+      result << [k, v]
+    end
+    return result
   end
-  return result
-end
