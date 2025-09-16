@@ -1,20 +1,53 @@
 class PhoneBook
     def initialize
+        @entries = {}
     end
 
     def add(name, number, is_listed)
-        raise Exception, "Not implemented"
-    end
+        if @entries.has_key?(name)
+            return false
+          end
+          if !(number =~ /^\d{3}-\d{3}-\d{4}$/)
+            return false
+          end
+          if is_listed
+            @entries.each do |n, info|
+              if info["number"] == number && info["listed"] == true
+                return false
+              end
+            end
+          end
+
+          @entries[name] = { "number" => number, "listed" => is_listed }
+    return true
+  end
 
     def lookup(name)
-        raise Exception, "Not implemented"
-    end
+        if @entries.has_key?(name)
+            info = @entries[name]
+            if info["listed"] == true
+              return info["number"]
+            end
+          end
+          return nil
+        end
 
     def lookupByNum(number)
-        raise Exception, "Not implemented"
-    end
+        @entries.each do |name, info|
+            if info["number"] == number && info["listed"] == true
+              return name
+            end
+          end
+          return nil
+        end
 
     def namesByAc(areacode)
-        raise Exception, "Not implemented"
+        result = []
+    @entries.each do |name, info|
+      if info["number"].start_with?(areacode + "-")
+        result << name
+      end
     end
+    return result
+  end
 end
